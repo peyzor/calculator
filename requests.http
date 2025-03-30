@@ -2,3 +2,9 @@
 
 ### Add
 POST {{baseUrl}}/add
+Content-Type: application/json
+
+{
+  "number1": 1,
+  "number2": 2
+}
