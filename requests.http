@@ -26,3 +26,12 @@ Content-Type: application/json
   "number1": 1,
   "number2": 2
 }
+
+### Divide
+POST {{baseUrl}}/divide
+Content-Type: application/json
+
+{
+  "number1": 4,
+  "number2": 0
+}
