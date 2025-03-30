@@ -12,6 +12,7 @@ func handleAdd(w http.ResponseWriter, r *http.Request) {
 	}
 
 	decoder := json.NewDecoder(r.Body)
+	defer r.Body.Close()
 
 	var params parameters
 	err := decoder.Decode(&params)
@@ -35,6 +36,7 @@ func handleAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResp)
 }
