@@ -87,7 +87,6 @@ func handleMultiply(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleDivide(w http.ResponseWriter, r *http.Request) {
-
 	type parameters struct {
 		Dividend int `json:"dividend"`
 		Divisor  int `json:"divisor"`
@@ -120,5 +119,29 @@ func handleDivide(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSum(w http.ResponseWriter, r *http.Request) {
+	var numbers []int
 
+	decoder := json.NewDecoder(r.Body)
+	defer r.Body.Close()
+
+	err := decoder.Decode(&numbers)
+	if err != nil {
+		responseWithJsonError(w, http.StatusBadRequest, "invalid input")
+		return
+	}
+
+	type response struct {
+		Result int `json:"result"`
+	}
+
+	sum := 0
+	for _, n := range numbers {
+		sum += n
+	}
+
+	resp := response{
+		Result: sum,
+	}
+
+	responseWithJson(w, http.StatusOK, resp)
 }

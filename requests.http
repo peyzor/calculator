@@ -35,3 +35,15 @@ Content-Type: application/json
   "dividend": 4,
   "divisor": 2
 }
+
+### Sum
+POST {{baseUrl}}/sum
+Content-Type: application/json
+
+[
+  1,
+  2,
+  3,
+  4,
+  5
+]
