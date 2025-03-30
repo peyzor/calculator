@@ -17,8 +17,7 @@ func handleAdd(w http.ResponseWriter, r *http.Request) {
 	var params parameters
 	err := decoder.Decode(&params)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("invalid input"))
+		responseWithJsonError(w, http.StatusBadRequest, "invalid input")
 		return
 	}
 
@@ -30,15 +29,7 @@ func handleAdd(w http.ResponseWriter, r *http.Request) {
 		Result: params.Number1 + params.Number2,
 	}
 
-	jsonResp, err := json.Marshal(resp)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write(jsonResp)
+	responseWithJson(w, http.StatusOK, resp)
 }
 
 func handleSubtract(w http.ResponseWriter, r *http.Request) {
