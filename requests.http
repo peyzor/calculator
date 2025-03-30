@@ -32,6 +32,6 @@ POST {{baseUrl}}/divide
 Content-Type: application/json
 
 {
-  "number1": 4,
-  "number2": 0
+  "dividend": 4,
+  "divisor": 2
 }

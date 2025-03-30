@@ -87,9 +87,10 @@ func handleMultiply(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleDivide(w http.ResponseWriter, r *http.Request) {
+
 	type parameters struct {
-		Number1 int `json:"number1"`
-		Number2 int `json:"number2"`
+		Dividend int `json:"dividend"`
+		Divisor  int `json:"divisor"`
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -102,8 +103,8 @@ func handleDivide(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if params.Number2 == 0 {
-		responseWithJsonError(w, http.StatusBadRequest, "number2 can't be zero")
+	if params.Divisor == 0 {
+		responseWithJsonError(w, http.StatusBadRequest, "divisor can't be zero")
 		return
 	}
 
@@ -112,7 +113,7 @@ func handleDivide(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := response{
-		Result: params.Number1 / params.Number2,
+		Result: params.Dividend / params.Divisor,
 	}
 
 	responseWithJson(w, http.StatusOK, resp)
